@@ -1,0 +1,38 @@
+## Using Flink for quantifying data integrity problems in µ-services
+
+The basic idea is that we want to keep track of events inside micro
+service architectures, and at the same time we have some application
+invariants regarding data integrity.
+
+Now we have a driver / workload generator that can run requests against
+an HTTP based microservice application.
+
+We also assume the microservices are event driven and use kafka (or we capture
+their communication in kafka).
+
+Now we have a stream of events inside topics in Kafka and these can be processed
+in real-time during the workload generation we continuously want to check
+the invariants in form of flink queries / flink-cep queries (possibly expressed in
+small specification language). The resulting statistics should be logged / displayed
+(grafana + prometheus / other dashboards solutions).
+
+
+### Flink
+Apache Flink is a framework and distributed processing engine for
+stateful computations over unbounded and bounded data streams. Flink
+has been designed to run in all common cluster environments, perform
+computations at in-memory speed and at any scale.
+
+Computations over data streams (distributed streaming data-flow engine).
+
+Wide range of stream data (continous events, actions in universe, sensors)
+
+- Unbounded streams (only defined start)
+- bounded streams (defined start and end)
+
+
+#### Flink-CEP
+
+Uses NFA implemenation for pattern matching in streams.
+
+Can define complex sequence patterns (conditions on each event + order of events).
