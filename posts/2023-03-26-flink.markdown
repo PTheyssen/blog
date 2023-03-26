@@ -1,3 +1,8 @@
+---
+title: Flink for invariant checking in µ-services
+author: Philipp Theyssen
+---
+
 ## Using Flink for quantifying data integrity problems in µ-services
 
 The basic idea is that we want to keep track of events inside micro

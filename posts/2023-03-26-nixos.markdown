@@ -1,0 +1,13 @@
+---
+title: NixOS
+author: Philipp Theyssen
+---
+
+I finally decided to move from Ubuntu (after 5 years) to NixOs.
+
+My main reasons for this is more about DevOps, Sysadminstration and
+configuration of computers in general.
+
+Since I really like formal methods (proof assistants + functional programming),
+migrating to NixOS as my new daily driver + some servers seems like a great
+project.

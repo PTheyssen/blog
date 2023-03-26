@@ -1,0 +1,9 @@
+---
+title: First Steps in Agda
+author: Philipp Theyssen
+---
+
+After my first course in proof assistants (using Isabelle) I want
+to explore this topic more deeply on my own, I plan
+to investigate Agda + TLA+ (as learning TLA+ seems translate
+to multiple tasks).
