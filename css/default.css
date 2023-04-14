@@ -1,7 +1,8 @@
 html {
     font-size: 70.5%;
     /* font-family: Consolas, monaco, monospace; */
-    font-family: Georgia,serif;
+    font-family: sans-serif;
+    /* font-family: Georgia,serif; */
     color: #555;
 }
 
@@ -11,7 +12,7 @@ body {
 }
 
 header {
-  border-bottom: 0.2rem solid #000;
+  border-bottom: 0.2rem dashed #000;
 }
 
 header a:hover {
@@ -37,7 +38,7 @@ nav a {
 footer {
   margin-top: 3rem;
   padding: 1.2rem 0;
-  border-top: 0.2rem solid #000;
+  border-top: 0.2rem dashed #000;
   font-size: 1.2rem;
   color: #555;
 }
@@ -60,6 +61,10 @@ article .header {
   font-weight: bold;
   color: #000;
   text-decoration: none;
+}
+
+.photoblog {
+    background: #555;
 }
 
 @media (max-width: 319px) {
@@ -122,9 +127,9 @@ article .header {
 
 @media (min-width: 640px) {
   body {
-    width: 70rem;
+    width: 68rem;
     margin: 0 auto;
-    padding: 0;
+    padding: 3rem;
   }
   header {
     margin: 0 0 3rem;

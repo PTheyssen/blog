@@ -17,16 +17,22 @@ main = hakyllWith config $ do
 
     match "cv.pdf" $ do
         route   idRoute
-        compile copyFileCompiler        
+        compile copyFileCompiler
 
     match "css/*" $ do
         route   idRoute
         compile compressCssCompiler
 
-    match (fromList ["contact.markdown", "photos.markdown", "now.markdown"]) $ do
+    match (fromList ["contact.markdown", "now.markdown"]) $ do
         route   $ setExtension "html"
         compile $ pandocCompiler
             >>= loadAndApplyTemplate "templates/default.html" defaultContext
+            >>= relativizeUrls
+
+    match (fromList ["photos.markdown"]) $ do
+        route   $ setExtension "html"
+        compile $ pandocCompiler
+            >>= loadAndApplyTemplate "templates/photos.html" defaultContext
             >>= relativizeUrls
 
     match "posts/*" $ do
