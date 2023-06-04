@@ -3,15 +3,14 @@ title: Invariants
 author: Philipp Theyssen
 ---
 
+Distilling the concept of invariants for microservice applications,
+such that one can translate them into flink
+-> quantify their  violation.
+
 ## Introduction
 
 Invariants about programs, systems, mathematical (formal)
 statements about a program, system that are always true.
-
-
-Do some real formal methods deep dive (find some good books and papers on the topic),
-invariants in programming + practical tools for reasoning about them.
-Logical underpinnings
 
 
 Landmark paper is Hoare (An Axiomatic Basis for
