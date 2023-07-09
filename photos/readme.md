@@ -22,3 +22,6 @@ p3 add-title-border.py -i BER-01-2023/DSC06669.jpg -t "LUCKY" -d "JANUARY 2023" 
 p3 add-title-border.py -i BER-04-02-2023/KRUMME-LANKE.jpg -t "KRUMME LANKE" -d "FEBRUARY 2023" -o KRUMME_LANKE.jpg
 
 p3 add-title-border.py -i BER-04-02-2023/KRUMME-LANKE.jpg -t "KRUMME LANKE" -d "FEBRUARY 2023" -o KRUMME_LANKE.jpg
+
+
+
