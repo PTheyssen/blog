@@ -32,7 +32,7 @@ main = hakyllWith config $ do
     match (fromList ["photos.markdown"]) $ do
         route   $ setExtension "html"
         compile $ pandocCompiler
-            >>= loadAndApplyTemplate "templates/photos.html" defaultContext
+            >>= loadAndApplyTemplate "templates/photo-blog.html" defaultContext
             >>= relativizeUrls
 
     match "posts/*" $ do

@@ -67,7 +67,11 @@ article .header {
 }
 
 .photoblog {
-    background: #555;
+    background: #222222;
+}
+
+.photoblog-menu {
+    color: #eaeaea
 }
 
 .snow {
