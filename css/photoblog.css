@@ -70,6 +70,10 @@ article .header {
     background: #222222;
 }
 
+.photoblog img {
+    max-width: 90%;
+}
+
 .photoblog-menu {
     color: #eaeaea
 }
@@ -79,6 +83,7 @@ article .header {
     color: #eaeaea;
     text-decoration: none;    
 }
+
     
 
 .snow {
