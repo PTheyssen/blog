@@ -29,7 +29,7 @@ main = hakyllWith config $ do
             >>= loadAndApplyTemplate "templates/default.html" defaultContext
             >>= relativizeUrls
 
-    match (fromList ["photos.markdown"]) $ do
+    match (fromList ["photos.markdown", "photos2.markdown", "photos3.markdown"]) $ do
         route   $ setExtension "html"
         compile $ pandocCompiler
             >>= loadAndApplyTemplate "templates/photo-blog.html" defaultContext

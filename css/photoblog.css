@@ -74,6 +74,13 @@ article .header {
     color: #eaeaea
 }
 
+.pagination a {
+    text-align: center;
+    color: #eaeaea;
+    text-decoration: none;    
+}
+    
+
 .snow {
     float: right;
     width: 30%;
