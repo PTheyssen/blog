@@ -4,7 +4,7 @@
         <meta charset="utf-8">
         <meta http-equiv="x-ua-compatible" content="ie=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <title>Invariants - Philipp Theyssen's Homepage</title>
+        <title>Invariants of Software Systems (DRAFT) - Philipp Theyssen's Homepage</title>
         <link rel="stylesheet" href="../css/default.css" />
     </head>
     <body>
@@ -24,7 +24,7 @@
         </header>
 
         <main role="main">
-            <!-- <h1>Invariants</h1> -->
+            <h1>Invariants of Software Systems (DRAFT)</h1>
             <article>
     <section class="header">
         Posted on March 28, 2023
@@ -33,182 +33,24 @@
         
     </section>
     <section>
-        <h2 id="introduction">Introduction</h2>
-<p>Invariants about programs, systems, mathematical (formal)
-statements about a program, system that are always true.</p>
-<p>Do some real formal methods deep dive (find some good books and papers on the topic),
-invariants in programming + practical tools for reasoning about them.
-Logical underpinnings</p>
-<p>Landmark paper is Hoare (An Axiomatic Basis for
-Computer Programming), which proposes to use
-logical foundations for computer programming and using
-axioms and deduction rules (formal proofs) for proofing
-properties of computer programs (Hoare Logic).</p>
-<p>Properties / invariants of computer programs (semantics
-of programming language), model microservices
-as statemachine (distributed system).</p>
-<p>Mathematical/formal exact description of execution space,
-behaviour of the program.</p>
-<p>Deterministic vs. Non-deterministic System important
-distinction, mostly large complex system become
-non-deterministic in some regards?</p>
-<p>Software, programming will have functionality / purpose,
-need to be sure it is fulfilled (depends on definition,
-specification).</p>
-<p>Basically can check if program adheres to specification,
-properties (business logic, correctness properties,
-domain properties etc.).</p>
-<p>Larger / open problem to come up with specification in
-the first place, facing constraints / limitation
-of resources (time, compute, memory) -&gt; need
-to fit software into entire world / model, business,
-organization, social organisations, constructs,
-agents (game theory), predictions.</p>
-<p>-&gt; some pointers (full systems building, formal methods
-applied).</p>
-<h3 id="lambda-calculus-type-theory-foundations">Lambda calculus, type theory foundations</h3>
-<p>Haskell / liquid haskell, coq, agda -&gt;
-express programs in these and then proof properties
-about them.</p>
-<h3 id="tla-state-machines">TLA+ (state machines)</h3>
-<p>Model a system with simplified model (state machine,
-transitions functions), model check properties.</p>
-<h2 id="definition">Definition</h2>
-<h2 id="checking">Checking</h2>
-<h2 id="data-integrity-invariants-microservices">Data integrity Invariants (microservices)</h2>
-<p>The main goal is enabling online monitoring of invariants
-that concern data integrity in microservice applications using
-stream processing.</p>
-<p>One of the main tasks of the master thesis besides programming
-type of work is coming up with a decent language for expressing
-invariants and with that specifically invariants for capturing
-data integrity in microservice applications.</p>
-<p>We deal with systems that have the following properties and underlying
-assumptions:</p>
+        <p>I want to write about invariants in software and computation, a rough
+outline of topics I want to discuss are:</p>
 <ul>
-<li>distributed</li>
-<li>contain replicated / duplicated data in heteregenous datastores</li>
-<li>event driven communication between microservices (broker: Kafka) or
-row-level change events from using CDC on databases</li>
+<li><p>history of invariants: Hoare logic</p></li>
+<li><p>connection to logic</p></li>
+<li><p>database theory as example research field</p></li>
+<li><p>model checkers: using model checkers to check invariants</p></li>
+<li><p>runtime monitoring</p></li>
+<li><p>comparison to proof assistants</p></li>
+<li><p>monitoring invariants of events (CEP)</p></li>
 </ul>
-<p>Our runtime engine / computation to check the invariants will
-be based on apache flink (a stream processing framework). We will
-utilize the standard datastream API (allows for abitrary java code + state)
-and the flink CEP library (cep patterns compiled into NFA+buffer).</p>
-<p>In terms of related work one has to consider earlier work in CEP and
-pattern languages. Further this also connects to runtime monitoring,
-which has a more formal background and often directly monitors
-invariants expressed as logical formulas (modal temporal first order logic).
-This approach has the shortcoming of being potentially only accesible to
-experts for formulating the invariants but in the end the software engineers
-themselves have the domain knowledge and are the most capable of formulating
-the invariants / maintaining and updating them.</p>
-<p>On the other side of the spectrum you can write direct flink queries / operators
-which comes down to using the flink API and writing java code, this
-is very powerful and will be the choice of experienced flink users but
-for engineers without stream processing experience this is a high
-barrier of entry, therefore we aim at a simple language that allows
-to quickly formulate relevant invariants using constructs which
-get translating into a flink query.</p>
-<p>Further, there are several pattern languages from research in CEP,
-for example Cayuga, these focus on embedding SQL into event streams,
-again this powerful and basically can be accomblished by
-using the Flink SQL API but the invariants will often
-result in multiple complicated queries and there is no clear
-focus on expressing invariants.</p>
-<h3 id="general-invariants-constructs">General Invariants Constructs</h3>
-<p>-&gt; select latest event concerning some property for example:</p>
-<p>LATEST product-price-changed KEY product-id as pc</p>
-<p>-&gt; before / ordering, followed by (causal ordering)</p>
-<p>customer-accept FOLLOWED BY policy-creation</p>
-<p>-&gt; value based / comparison</p>
-<p>-&gt; for each event need select case (specification) then
-can formulate invariant (ordering, causality + time invariant)</p>
-<p>EVENT product-bought pb</p>
-<p>EVENT product-price-changed pc
-WHERE pc.ts &lt; pb.ts
-AND LATEST pc.id</p>
-<p>INVARIANT pc.price = pb.price WHERE pc.id = pb.id</p>
-<table style="width:76%;">
-<colgroup>
-<col style="width: 76%" />
-</colgroup>
-<tbody>
-<tr class="odd">
-<td style="text-align: left;">EVENT product-bought pb, product-price-changed pc</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">INVARIANT pc.ts &lt; pb.ts AND pc.price = pb.price AND pc.id = pb.id</td>
-</tr>
-</tbody>
-</table>
-<p>pb1 pb2 pc1 pb3 pc2 pc3 pb4</p>
-<p>simpleCond: pb or pc, simpleCond: pb or pc: iterative:cond</p>
-<p>EVENT SEQ (pc, pb) (next, followedBy,followedByAny)
-INVARIANT:</p>
-<p>policy-created, policy-updated, policy-deleted
-EVENT SEQ (policy-created, policy-updated, policy-deleted)
-STATE</p>
-<p>foreign key
-user-deleted, post-deleted, post-created</p>
-<p>foreign key
-user-deleted-from-db1, user-deleted-from-db2</p>
-<p>product-price-changed pc {id, price}
-product-bought pb {id, amount, price}
-EVENT SEQ pc1, !pc2, *, pb
-WHERE pc.id = pb.id AND pc1.id = pc2.id
-INVARIANT pc.price = pb.price</p>
-<p>Event Ordering Syntax (similar to regex)
-EVENT SEQ pc1, (pc2 | pb)
-translating: pc1.followedByAny(SimpCond(pc2 or pb))</p>
-<p>EVENT SEQ pc1, [!pc2]*, pb
--&gt; translating: pc1.notFollowedBy(pc2).followedByAny(pb)
-pc1.followedBy(SimpCond(!pc2)) .</p>
-<p>pc1, !pc2 -&gt; pc1.notNext(pc2)</p>
-<p>pc1, pc2*, pb</p>
-<p>buy, buy, buy, buy-statistics
-EVENT SEQ (buy+, buy-statistics)
-WHERE buy.userid = buy-statistics.userid
-INVARIANT SUM(buy.amount) = buy-statistics.total-amount</p>
-<p>EVENT SEQ (customer-decision, policy-created) WITHIN 500ms</p>
-<p>Writing an invariant:
-0.1 (maybe filter beforehand only for relevant events)
-1. Specify event seq (with ordering, with regex or, not followed, wildcard)
--&gt; how to handle followedBy, followedByAny
--&gt; example: need followedByAny for checkout, otherwise would only check the invariant for first checkout
-and not subsequent ones
--&gt; only allow single or + as start of sequence
-2. State (optionally)
-3. WHERE clause before invariant / filter
-3. Condition / Invariant -&gt; has to be true</p>
-<p>A a {id}
-B b {id}
-C c {id}
-EVENT SEQ (a, b, c)</p>
-<p>EVENTS e f g (f or g)</p>
-<p>EVENT SEQ (product-bought pb, product-price-changed pc)
-WHERE</p>
-<p>Invariants involving CDC of catalog items:
-- if user is deleted in sql database -&gt; orders and basket should be deleted</p>
-<p>==&gt; formulating these invariants with deep knowledge of each datastore
-of each microservice defeats the whole purpose of microservice (developer
-needs to know details about each microservice, and if microservice
-evolves schema then invariants have to be changed</p>
-<p>—— social network invariants
-- only posts should exist if user exists (no user deleted event)
-- timely reaction (limit on eventual consistency -&gt; quantify eventual consistency in simulation)
-==&gt; these metrics could also be extracted from logging / tracing framework</p>
-<p>–&gt; invariants that just concern events themselves (timing) are not that novel / probably
-easier to check in logging / tracing / monitoring
-==&gt; invariants get interesting once you look at data values / content of events
-–&gt; causal ordering detection (sequence of events) (specify DAG for event orders)</p>
     </section>
 </article>
 
         </main>
 
         <footer>
-            Site proudly generated by Hakyll
+            <!-- Site proudly generated by Hakyll -->
         </footer>
     </body>
 </html>

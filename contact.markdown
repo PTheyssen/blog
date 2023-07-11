@@ -8,8 +8,9 @@ You can reach me via mail at
 
 Find me on:
 
-- [LinkedIn](https://www.linkedin.com/in/philipp-theyssen/)
-- [twitter](https://twitter.com/PTheyssen)
+
+- <a href="https://www.linkedin.com/in/philipp-theyssen/" target="_blank">LinkedIn</a>
+- <a href="https://twitter.com/PTheyssen" target="_blank">Twitter</a>
 
 
 I invite you to send me a message on any topic you would like 
