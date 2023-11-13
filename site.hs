@@ -15,6 +15,14 @@ main = hakyllWith config $ do
         route   idRoute
         compile copyFileCompiler
 
+    match "projects/fjale-app/*" $ do
+        route   idRoute
+        compile copyFileCompiler
+
+    match "projects/fjale-app/assets/*" $ do
+        route   idRoute
+        compile copyFileCompiler
+
     match "cv.pdf" $ do
         route   idRoute
         compile copyFileCompiler
@@ -33,6 +41,12 @@ main = hakyllWith config $ do
         route   $ setExtension "html"
         compile $ pandocCompiler
             >>= loadAndApplyTemplate "templates/photo-blog.html" defaultContext
+            >>= relativizeUrls
+
+    match "projects.markdown" $ do
+        route   $ setExtension "html"
+        compile $ pandocCompiler
+            >>= loadAndApplyTemplate "templates/default.html" defaultContext
             >>= relativizeUrls
 
     match "posts/*" $ do
