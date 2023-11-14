@@ -15,14 +15,6 @@ main = hakyllWith config $ do
         route   idRoute
         compile copyFileCompiler
 
-    match "projects/fjale-app/*" $ do
-        route   idRoute
-        compile copyFileCompiler
-
-    match "projects/fjale-app/assets/*" $ do
-        route   idRoute
-        compile copyFileCompiler
-
     match "cv.pdf" $ do
         route   idRoute
         compile copyFileCompiler
