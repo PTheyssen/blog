@@ -1,0 +1,104 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Phone Prices - Philipp Theyssen's Homepage</title>
+        <link rel="stylesheet" href="../css/default.css" />
+        <link rel="stylesheet" href="../css/syntax.css" />
+    </head>
+    <body>
+        <header>
+            <div class="logo">
+                <a href="../">Home</a>
+            </div>
+            <nav>
+              <!-- <a href="/">Home</a> -->
+                <a href="../archive.html">Blog</a>
+                <a href="../now.html">Now</a>
+                <a href="../projects.html">Projects</a>
+                <a href="https://github.com/PTheyssen" target="_blank">Code</a>
+                <a href="../cv.pdf" target="_blank">CV</a>
+                <a href="../contact.html">Contact</a>
+                <a href="../photos.html">Photos</a>
+            </nav>
+        </header>
+
+        <main role="main">
+            <h1>Phone Prices</h1>
+            <article>
+    <section class="header">
+        Posted on December 22, 2023
+        
+            by Philipp Theyssen
+        
+    </section>
+    <section>
+        <p>My Iphone 7 has really seen better days, thats why I recently started
+looking for a new phone.</p>
+<p>I somehow want to stay with an Iphone, purely out of convenience.</p>
+<p>I like to keep it minimal and have some nice apps,</p>
+<p>even recently discovered flat habits / org-roam.</p>
+<p>(Though eventually I should probably take the opensource android plunge)</p>
+<p>Anyways, I think buying refurbed nowadays is a great option.</p>
+<p>Though, I was really unsure about the price variations, and
+wanted to record some historic prices for the models I am interested in.</p>
+<h2 id="models">Models</h2>
+<ul>
+<li>Iphone SE</li>
+<li>Iphone 12</li>
+<li>Iphone 13</li>
+</ul>
+<p>As a first protopye I chose only a single website for to check the prices, of course in Germany there are websites like Idealo, which do exactly this but, but obviously thats less fun than writing you own webscraper.</p>
+<h2 id="quick-python-script">Quick python script</h2>
+<ul>
+<li></li>
+</ul>
+<h2 id="update-retrieve-actual-phone-parameters">Update: retrieve actual phone parameters</h2>
+<p>The problem was that</p>
+<h2 id="here-you-can">Here you can</h2>
+<h2 id="setting-up-a-systemd-timer-in-nixos">Setting up a systemd timer in nixos</h2>
+<div class="sourceCode" id="cb1"><pre class="sourceCode nix"><code class="sourceCode nix"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>  systemd.timers.<span class="st">&quot;scrape-phone-prices&quot;</span> = <span class="op">{</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>    <span class="va">wantedBy</span> <span class="op">=</span> <span class="op">[</span> <span class="st">&quot;timers.target&quot;</span> <span class="op">];</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>    <span class="va">timerConfig</span> <span class="op">=</span> <span class="op">{</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>      <span class="va">OnBootSec</span> <span class="op">=</span> <span class="st">&quot;30m&quot;</span><span class="op">;</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>      <span class="va">OnUnitActiveSec</span> <span class="op">=</span> <span class="st">&quot;30m&quot;</span><span class="op">;</span></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>      <span class="va">Unit</span> <span class="op">=</span> <span class="st">&quot;scrape-phone-prices.service&quot;</span><span class="op">;</span></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>    <span class="op">};</span></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>  <span class="op">}</span>;</span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>  systemd.services.<span class="st">&quot;scrape-phone-prices&quot;</span> = <span class="op">{</span></span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>    <span class="va">wantedBy</span> <span class="op">=</span> <span class="op">[</span> <span class="st">&quot;multi-user.target&quot;</span> <span class="op">];</span></span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>    <span class="va">path</span> <span class="op">=</span> <span class="op">[</span></span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>      pkgs.nix</span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>      pkgs.bash</span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>      <span class="op">(</span>pkgs.python3.withPackages <span class="op">(</span><span class="va">ps</span><span class="op">:</span> <span class="kw">with</span> ps<span class="op">;</span> <span class="op">[</span></span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a>        numpy</span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a>        requests</span>
+<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a>        beautifulsoup4</span>
+<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a>      <span class="op">]))</span></span>
+<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a>    <span class="op">];</span></span>
+<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a>    <span class="va">script</span> <span class="op">=</span> <span class="st">''</span></span>
+<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a><span class="st">       python3 /home/pt/repos/phone-prices/scrape-phone-prices.py</span></span>
+<span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a><span class="st">    ''</span><span class="op">;</span></span>
+<span id="cb1-24"><a href="#cb1-24" aria-hidden="true" tabindex="-1"></a>    <span class="va">serviceConfig</span> <span class="op">=</span> <span class="op">{</span></span>
+<span id="cb1-25"><a href="#cb1-25" aria-hidden="true" tabindex="-1"></a>      <span class="va">Type</span> <span class="op">=</span> <span class="st">&quot;oneshot&quot;</span><span class="op">;</span></span>
+<span id="cb1-26"><a href="#cb1-26" aria-hidden="true" tabindex="-1"></a>      <span class="va">User</span> <span class="op">=</span> <span class="st">&quot;pt&quot;</span><span class="op">;</span></span>
+<span id="cb1-27"><a href="#cb1-27" aria-hidden="true" tabindex="-1"></a>    <span class="op">};</span></span>
+<span id="cb1-28"><a href="#cb1-28" aria-hidden="true" tabindex="-1"></a>  <span class="op">}</span>;</span></code></pre></div>
+<h3 id="future">Future</h3>
+<ul>
+<li>I really would like to move this to azure (azure functions),</li>
+<li>story sqlite file in azure storage account, ideally using terraform</li>
+</ul>
+    </section>
+</article>
+
+        </main>
+
+        <footer>
+            <!-- Site proudly generated by Hakyll -->
+        </footer>
+    </body>
+</html>
