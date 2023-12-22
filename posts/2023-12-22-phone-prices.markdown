@@ -1,5 +1,5 @@
 ---
-title: Phone Prices
+title: Scraping Phone Prices
 author: Philipp Theyssen
 ---
 
@@ -44,8 +44,6 @@ The problem was that
 
 
 
-## Here you can
-
 
 
 ## Setting up a systemd timer in nixos
@@ -85,7 +83,9 @@ The problem was that
 
 
 
+## Recorded Price Data
 
+<img src="../images/prices-22-12-2023.svg" style="width:950px"/>
 
 
 

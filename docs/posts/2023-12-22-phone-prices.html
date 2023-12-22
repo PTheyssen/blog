@@ -4,7 +4,7 @@
         <meta charset="utf-8">
         <meta http-equiv="x-ua-compatible" content="ie=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <title>Phone Prices - Philipp Theyssen's Homepage</title>
+        <title>Scraping Phone Prices - Philipp Theyssen's Homepage</title>
         <link rel="stylesheet" href="../css/default.css" />
         <link rel="stylesheet" href="../css/syntax.css" />
     </head>
@@ -26,7 +26,7 @@
         </header>
 
         <main role="main">
-            <h1>Phone Prices</h1>
+            <h1>Scraping Phone Prices</h1>
             <article>
     <section class="header">
         Posted on December 22, 2023
@@ -57,7 +57,6 @@ wanted to record some historic prices for the models I am interested in.</p>
 </ul>
 <h2 id="update-retrieve-actual-phone-parameters">Update: retrieve actual phone parameters</h2>
 <p>The problem was that</p>
-<h2 id="here-you-can">Here you can</h2>
 <h2 id="setting-up-a-systemd-timer-in-nixos">Setting up a systemd timer in nixos</h2>
 <div class="sourceCode" id="cb1"><pre class="sourceCode nix"><code class="sourceCode nix"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>  systemd.timers.<span class="st">&quot;scrape-phone-prices&quot;</span> = <span class="op">{</span></span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>    <span class="va">wantedBy</span> <span class="op">=</span> <span class="op">[</span> <span class="st">&quot;timers.target&quot;</span> <span class="op">];</span></span>
@@ -87,6 +86,8 @@ wanted to record some historic prices for the models I am interested in.</p>
 <span id="cb1-26"><a href="#cb1-26" aria-hidden="true" tabindex="-1"></a>      <span class="va">User</span> <span class="op">=</span> <span class="st">&quot;pt&quot;</span><span class="op">;</span></span>
 <span id="cb1-27"><a href="#cb1-27" aria-hidden="true" tabindex="-1"></a>    <span class="op">};</span></span>
 <span id="cb1-28"><a href="#cb1-28" aria-hidden="true" tabindex="-1"></a>  <span class="op">}</span>;</span></code></pre></div>
+<h2 id="recorded-price-data">Recorded Price Data</h2>
+<p><img src="../images/prices-22-12-2023.svg" style="width:950px" /></p>
 <h3 id="future">Future</h3>
 <ul>
 <li>I really would like to move this to azure (azure functions),</li>
