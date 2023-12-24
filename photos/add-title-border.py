@@ -46,7 +46,9 @@ def add_title_to_image(input_file: str, title: str, date: str, output_file:str):
     draw = ImageDraw.Draw(border_img)
     # font = ImageFont.truetype("path/to/font.ttf", size=20)
     font_size = int(rect_height * 0.7)
-    font = ImageFont.truetype("/usr/share/fonts/truetype/freefont/FreeMono.ttf", font_size, encoding="unic")
+    font = ImageFont.truetype("/nix/store/di0qwyzbdrb7pzwgbd3vbkflpnkz8ssr-martian-mono-1.0.0/share/fonts/opentype/MartianMono-CnLt.otf", font_size, encoding="unic")    
+    
+    # font = ImageFont.truetype("/usr/share/fonts/truetype/freefont/FreeMono.ttf", font_size, encoding="unic")
 
     text_width, _ = draw.textsize(title, font)
     draw.text(((border_img.width - text_width) / 2, 10), title, 'white', font)

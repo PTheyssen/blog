@@ -45,7 +45,6 @@ The problem was that
 
 
 
-
 ## Setting up a systemd timer in nixos
 
 ```nix
@@ -81,14 +80,20 @@ The problem was that
 
 
 
-
-
 ## Recorded Price Data
 
 <img src="../images/prices-22-12-2023.svg" style="width:950px"/>
 
 
+## Use Pyautogui for whats app
+Ugly solution (though fascinating) sending whats app message to myself,
+by opening new tab in browser.
 
-### Future
+
+## Using telegram bot (seems pretty easy to setup)
+
+
+### Future (next in series)
+- having custom price alert solution in place (fun + in futuer lots of possible savings)
 - I really would like to move this to azure (azure functions),
-+ story sqlite file in azure storage account, ideally using terraform
+- store sqlite file in azure storage account, ideally using terraform

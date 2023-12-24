@@ -16,3 +16,7 @@ add-title-border.py [-h] [-i INPUT] [-t TITLE] [-d DATE] [-o OUTPUT]
 ```
 p3 add-title-border.py -i BER-01-2023/DSC06626.jpg -t "HELLO WORLD" -d "JANUARY 2023" -o test.jpg
 ```
+
+python3 add-title-border.py -i ./MUC_I.jpg -t "MUC I" -d "December 2023" -o MUC_I.jpg
+python3 add-title-border.py -i ./MUC_I.jpg -t "MUC I" -d "December 2023" -o MUC_I.jpg
+
