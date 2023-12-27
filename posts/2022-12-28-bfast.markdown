@@ -1,0 +1,16 @@
+# Bfast
+
+During PMPH course at UCPH completed BFast implementation in C++/Cuda.
+
+
+See the original paper here: 
+
+Futhark implementation of algorithm.
+
+
+## Manual optimization (Kernels)
+
+
+
+
+See the final presentation here.

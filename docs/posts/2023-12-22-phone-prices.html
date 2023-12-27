@@ -35,68 +35,289 @@
         
     </section>
     <section>
-        <p>My Iphone 7 has really seen better days, thats why I recently started
-looking for a new phone.</p>
-<p>I somehow want to stay with an Iphone, purely out of convenience.</p>
-<p>I like to keep it minimal and have some nice apps,</p>
-<p>even recently discovered flat habits / org-roam.</p>
-<p>(Though eventually I should probably take the opensource android plunge)</p>
-<p>Anyways, I think buying refurbed nowadays is a great option.</p>
-<p>Though, I was really unsure about the price variations, and
-wanted to record some historic prices for the models I am interested in.</p>
-<h2 id="models">Models</h2>
+        <h2 id="motivation">Motivation</h2>
+<p>My Iphone 7 has seen better days, thats why I started
+to look for a new phone.</p>
+<p>I want to stay with an Iphone, mainly due to convenience.</p>
+<p>I also like my current setup which is centered around key apps and
+using a greyscale filter + a heavily reduced whitepoint (see <a href="https://matt.might.net/articles/cripple-your-technology/">cripple-your-technology</a>)</p>
+<p>Some apps I value:</p>
+<ul>
+<li>anki</li>
+<li>gmaps</li>
+<li>mail</li>
+<li>banking</li>
+<li>fitbit</li>
+<li>shortbreak (movement videos)</li>
+<li>wikipedia</li>
+<li>nextcloud</li>
+<li>whatsapp/signal</li>
+<li>overcast</li>
+<li>brilliant</li>
+<li>org file browsing + flat habits</li>
+</ul>
+<p>Thats why I want to stay with an Iphone, although they are of course very pricy.
+Luckily, buying refurbed nowadays is a great option, but when I started
+looking up some prices there seems to be quite a lot of movement going on.</p>
+<p>This likely arises naturally from the market (resellers depend on individuals or
+maybe companies to sell the used phones, and the best deals are simply very limited,
+or sold out quickly).</p>
+<p>In order to determine whats a good price I decided to write a small web scraper
+and record some historic prices for the models I am interested in, which are:</p>
 <ul>
 <li>Iphone SE</li>
 <li>Iphone 12</li>
 <li>Iphone 13</li>
 </ul>
-<p>As a first protopye I chose only a single website for to check the prices, of course in Germany there are websites like Idealo, which do exactly this but, but obviously thats less fun than writing you own webscraper.</p>
-<h2 id="quick-python-script">Quick python script</h2>
-<ul>
-<li></li>
-</ul>
-<h2 id="update-retrieve-actual-phone-parameters">Update: retrieve actual phone parameters</h2>
-<p>The problem was that</p>
-<h2 id="setting-up-a-systemd-timer-in-nixos">Setting up a systemd timer in nixos</h2>
-<div class="sourceCode" id="cb1"><pre class="sourceCode nix"><code class="sourceCode nix"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>  systemd.timers.<span class="st">&quot;scrape-phone-prices&quot;</span> = <span class="op">{</span></span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>    <span class="va">wantedBy</span> <span class="op">=</span> <span class="op">[</span> <span class="st">&quot;timers.target&quot;</span> <span class="op">];</span></span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>    <span class="va">timerConfig</span> <span class="op">=</span> <span class="op">{</span></span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>      <span class="va">OnBootSec</span> <span class="op">=</span> <span class="st">&quot;30m&quot;</span><span class="op">;</span></span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>      <span class="va">OnUnitActiveSec</span> <span class="op">=</span> <span class="st">&quot;30m&quot;</span><span class="op">;</span></span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>      <span class="va">Unit</span> <span class="op">=</span> <span class="st">&quot;scrape-phone-prices.service&quot;</span><span class="op">;</span></span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>    <span class="op">};</span></span>
-<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>  <span class="op">}</span>;</span>
-<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>  systemd.services.<span class="st">&quot;scrape-phone-prices&quot;</span> = <span class="op">{</span></span>
-<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>    <span class="va">wantedBy</span> <span class="op">=</span> <span class="op">[</span> <span class="st">&quot;multi-user.target&quot;</span> <span class="op">];</span></span>
-<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>    <span class="va">path</span> <span class="op">=</span> <span class="op">[</span></span>
-<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>      pkgs.nix</span>
-<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>      pkgs.bash</span>
-<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>      <span class="op">(</span>pkgs.python3.withPackages <span class="op">(</span><span class="va">ps</span><span class="op">:</span> <span class="kw">with</span> ps<span class="op">;</span> <span class="op">[</span></span>
-<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a>        numpy</span>
-<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a>        requests</span>
-<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a>        beautifulsoup4</span>
-<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a>      <span class="op">]))</span></span>
-<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a>    <span class="op">];</span></span>
-<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a>    <span class="va">script</span> <span class="op">=</span> <span class="st">''</span></span>
-<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a><span class="st">       python3 /home/pt/repos/phone-prices/scrape-phone-prices.py</span></span>
-<span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a><span class="st">    ''</span><span class="op">;</span></span>
-<span id="cb1-24"><a href="#cb1-24" aria-hidden="true" tabindex="-1"></a>    <span class="va">serviceConfig</span> <span class="op">=</span> <span class="op">{</span></span>
-<span id="cb1-25"><a href="#cb1-25" aria-hidden="true" tabindex="-1"></a>      <span class="va">Type</span> <span class="op">=</span> <span class="st">&quot;oneshot&quot;</span><span class="op">;</span></span>
-<span id="cb1-26"><a href="#cb1-26" aria-hidden="true" tabindex="-1"></a>      <span class="va">User</span> <span class="op">=</span> <span class="st">&quot;pt&quot;</span><span class="op">;</span></span>
-<span id="cb1-27"><a href="#cb1-27" aria-hidden="true" tabindex="-1"></a>    <span class="op">};</span></span>
-<span id="cb1-28"><a href="#cb1-28" aria-hidden="true" tabindex="-1"></a>  <span class="op">}</span>;</span></code></pre></div>
+<h2 id="technical-components">Technical components</h2>
+<p>The simplest thing I could think of is a python script regularly
+scrapes the price of a list of models and saves these in an sqlite file.</p>
+<p>In a first version I did just that.</p>
+<p>Next, I realized it would be great to also save the parameters of
+the current offer, of course cheaper phone usually have a weird color and</p>
+<h2 id="update-retrieve-actual-phone-parameters">Update: Retrieve actual phone parameters</h2>
+<p>The problem was that even though I had a price at a specific date,
+the exact parameters of the phone were missing. In the refurbished shop
+I use they always show you the “best deal”, therefore dure to simplicity
+I started to save the entire html in the sqlite database also besides
+the price, this lets me look up the phone parameters at a later point in time.</p>
+<p>The most imporant pieces of the code are:</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Function to scrape and extract the price from the provided URL</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> scrape_price(url):</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>    response <span class="op">=</span> requests.get(url)</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="ss">f&quot;Scrapping url </span><span class="sc">{</span>url<span class="sc">}</span><span class="ss">, got response </span><span class="sc">{</span>response<span class="sc">}</span><span class="ss">&quot;</span>)</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>    soup <span class="op">=</span> BeautifulSoup(response.text, <span class="st">'html.parser'</span>)</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>    price <span class="op">=</span> <span class="co"># your logic for extracing the price</span></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> price.strip(), <span class="bu">str</span>(soup)</span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="co"># Function to save data into the SQLite database</span></span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> save_to_database(url, price, date, html):</span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>    DB_PATH <span class="op">=</span> <span class="st">'/home/pt/repos/phone-prices/prices.db'</span></span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>    conn <span class="op">=</span> sqlite3.<span class="ex">connect</span>(DB_PATH)</span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>    cursor <span class="op">=</span> conn.cursor()</span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Create a table if it doesn't exist</span></span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a>    cursor.execute(<span class="st">&quot;&quot;&quot;</span></span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a><span class="st">        CREATE TABLE IF NOT EXISTS prices (</span></span>
+<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a><span class="st">            id INTEGER PRIMARY KEY AUTOINCREMENT,</span></span>
+<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a><span class="st">            url TEXT,</span></span>
+<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a><span class="st">            price TEXT,</span></span>
+<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a><span class="st">            date TEXT,</span></span>
+<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a><span class="st">            html TEXT,</span></span>
+<span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a><span class="st">            notified INTEGER</span></span>
+<span id="cb1-24"><a href="#cb1-24" aria-hidden="true" tabindex="-1"></a><span class="st">        )</span></span>
+<span id="cb1-25"><a href="#cb1-25" aria-hidden="true" tabindex="-1"></a><span class="st">    &quot;&quot;&quot;</span>)</span>
+<span id="cb1-26"><a href="#cb1-26" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-27"><a href="#cb1-27" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Insert the scraped data into the database</span></span>
+<span id="cb1-28"><a href="#cb1-28" aria-hidden="true" tabindex="-1"></a>    notified <span class="op">=</span> <span class="dv">0</span></span>
+<span id="cb1-29"><a href="#cb1-29" aria-hidden="true" tabindex="-1"></a>    cursor.execute(</span>
+<span id="cb1-30"><a href="#cb1-30" aria-hidden="true" tabindex="-1"></a>        <span class="st">&quot;&quot;&quot;</span></span>
+<span id="cb1-31"><a href="#cb1-31" aria-hidden="true" tabindex="-1"></a><span class="st">        INSERT INTO prices (url, price, date, html, notified)</span></span>
+<span id="cb1-32"><a href="#cb1-32" aria-hidden="true" tabindex="-1"></a><span class="st">        VALUES (?, ?, ?, ?, ?)</span></span>
+<span id="cb1-33"><a href="#cb1-33" aria-hidden="true" tabindex="-1"></a><span class="st">        &quot;&quot;&quot;</span>,</span>
+<span id="cb1-34"><a href="#cb1-34" aria-hidden="true" tabindex="-1"></a>        (url, price, date, html, notified))</span>
+<span id="cb1-35"><a href="#cb1-35" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-36"><a href="#cb1-36" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Commit the changes and close the connection</span></span>
+<span id="cb1-37"><a href="#cb1-37" aria-hidden="true" tabindex="-1"></a>    conn.commit()</span>
+<span id="cb1-38"><a href="#cb1-38" aria-hidden="true" tabindex="-1"></a>    conn.close()</span>
+<span id="cb1-39"><a href="#cb1-39" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-40"><a href="#cb1-40" aria-hidden="true" tabindex="-1"></a><span class="co"># Main function</span></span>
+<span id="cb1-41"><a href="#cb1-41" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> main():</span>
+<span id="cb1-42"><a href="#cb1-42" aria-hidden="true" tabindex="-1"></a>    urls <span class="op">=</span> <span class="co">## your list of url's</span></span>
+<span id="cb1-43"><a href="#cb1-43" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> url <span class="kw">in</span> urls:</span>
+<span id="cb1-44"><a href="#cb1-44" aria-hidden="true" tabindex="-1"></a>        <span class="cf">try</span>:</span>
+<span id="cb1-45"><a href="#cb1-45" aria-hidden="true" tabindex="-1"></a>            <span class="co"># Scrape the price</span></span>
+<span id="cb1-46"><a href="#cb1-46" aria-hidden="true" tabindex="-1"></a>            price, html <span class="op">=</span> scrape_price(url)</span>
+<span id="cb1-47"><a href="#cb1-47" aria-hidden="true" tabindex="-1"></a>            <span class="co"># print(html)</span></span>
+<span id="cb1-48"><a href="#cb1-48" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-49"><a href="#cb1-49" aria-hidden="true" tabindex="-1"></a>            <span class="co"># Get the current date</span></span>
+<span id="cb1-50"><a href="#cb1-50" aria-hidden="true" tabindex="-1"></a>            current_date <span class="op">=</span> (datetime.now()</span>
+<span id="cb1-51"><a href="#cb1-51" aria-hidden="true" tabindex="-1"></a>                .strftime(<span class="st">'%Y-%m-</span><span class="sc">%d</span><span class="st"> %H:%M:%S'</span>))</span>
+<span id="cb1-52"><a href="#cb1-52" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-53"><a href="#cb1-53" aria-hidden="true" tabindex="-1"></a>            <span class="co"># Save the data into the SQLite database</span></span>
+<span id="cb1-54"><a href="#cb1-54" aria-hidden="true" tabindex="-1"></a>            save_to_database(url, price, current_date, html)</span>
+<span id="cb1-55"><a href="#cb1-55" aria-hidden="true" tabindex="-1"></a>            time.sleep(<span class="dv">3</span>)</span>
+<span id="cb1-56"><a href="#cb1-56" aria-hidden="true" tabindex="-1"></a>        <span class="cf">except</span> <span class="pp">Exception</span> <span class="im">as</span> e:</span>
+<span id="cb1-57"><a href="#cb1-57" aria-hidden="true" tabindex="-1"></a>            <span class="bu">print</span>(e)</span>
+<span id="cb1-58"><a href="#cb1-58" aria-hidden="true" tabindex="-1"></a>            <span class="bu">print</span>(<span class="ss">f&quot;Failed for </span><span class="sc">{</span>url<span class="sc">}</span><span class="ss">&quot;</span>)</span>
+<span id="cb1-59"><a href="#cb1-59" aria-hidden="true" tabindex="-1"></a>        <span class="cf">else</span>:</span>
+<span id="cb1-60"><a href="#cb1-60" aria-hidden="true" tabindex="-1"></a>            <span class="cf">pass</span></span></code></pre></div>
+<h2 id="setting-up-a-systemd-timer-using-nixos">Setting up a systemd timer using NixOs</h2>
+<p>To me an interesting part of this project is
+setting up the scrap job as a systemd timer in my NixOs configuration.
+I only recently started using NixOS its always interesting (mmmh some people woudl say hard)
+to do things for the first time. Although I really feel the need to dive deeper
+into the details and do things the correct way.</p>
+<p>Anyway, its actually very straight forward to declaratively define
+the systemd timer.</p>
+<p>Though, one thing I spent quite a lot of time on was, while developing this
+project I used a shell.nix file, with all the necessary packages, afterwards</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode nix"><code class="sourceCode nix"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>  systemd.timers.<span class="st">&quot;scrape-phone-prices&quot;</span> = <span class="op">{</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>    <span class="va">wantedBy</span> <span class="op">=</span> <span class="op">[</span> <span class="st">&quot;timers.target&quot;</span> <span class="op">];</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>    <span class="va">timerConfig</span> <span class="op">=</span> <span class="op">{</span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>      <span class="va">OnBootSec</span> <span class="op">=</span> <span class="st">&quot;30m&quot;</span><span class="op">;</span></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>      <span class="va">OnUnitActiveSec</span> <span class="op">=</span> <span class="st">&quot;30m&quot;</span><span class="op">;</span></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>      <span class="va">Unit</span> <span class="op">=</span> <span class="st">&quot;scrape-phone-prices.service&quot;</span><span class="op">;</span></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>    <span class="op">};</span></span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>  <span class="op">}</span>;</span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>  systemd.services.<span class="st">&quot;scrape-phone-prices&quot;</span> = <span class="op">{</span></span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>    <span class="va">wantedBy</span> <span class="op">=</span> <span class="op">[</span> <span class="st">&quot;multi-user.target&quot;</span> <span class="op">];</span></span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>    <span class="va">path</span> <span class="op">=</span> <span class="op">[</span></span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>      pkgs.nix</span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a>      pkgs.bash</span>
+<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a>      <span class="op">(</span>pkgs.python3.withPackages <span class="op">(</span><span class="va">ps</span><span class="op">:</span> <span class="kw">with</span> ps<span class="op">;</span> <span class="op">[</span></span>
+<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a>        numpy</span>
+<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a>        requests</span>
+<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a>        beautifulsoup4</span>
+<span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a>      <span class="op">]))</span></span>
+<span id="cb2-20"><a href="#cb2-20" aria-hidden="true" tabindex="-1"></a>    <span class="op">];</span></span>
+<span id="cb2-21"><a href="#cb2-21" aria-hidden="true" tabindex="-1"></a>    <span class="va">script</span> <span class="op">=</span> <span class="st">''</span></span>
+<span id="cb2-22"><a href="#cb2-22" aria-hidden="true" tabindex="-1"></a><span class="st">       python3 /home/pt/repos/phone-prices/scrape-phone-prices.py</span></span>
+<span id="cb2-23"><a href="#cb2-23" aria-hidden="true" tabindex="-1"></a><span class="st">    ''</span><span class="op">;</span></span>
+<span id="cb2-24"><a href="#cb2-24" aria-hidden="true" tabindex="-1"></a>    <span class="va">serviceConfig</span> <span class="op">=</span> <span class="op">{</span></span>
+<span id="cb2-25"><a href="#cb2-25" aria-hidden="true" tabindex="-1"></a>      <span class="va">Type</span> <span class="op">=</span> <span class="st">&quot;oneshot&quot;</span><span class="op">;</span></span>
+<span id="cb2-26"><a href="#cb2-26" aria-hidden="true" tabindex="-1"></a>      <span class="va">User</span> <span class="op">=</span> <span class="st">&quot;pt&quot;</span><span class="op">;</span></span>
+<span id="cb2-27"><a href="#cb2-27" aria-hidden="true" tabindex="-1"></a>    <span class="op">};</span></span>
+<span id="cb2-28"><a href="#cb2-28" aria-hidden="true" tabindex="-1"></a>  <span class="op">}</span>;</span></code></pre></div>
 <h2 id="recorded-price-data">Recorded Price Data</h2>
-<p><img src="../images/prices-22-12-2023.svg" style="width:950px" /></p>
+<p>Now lets take a look at some price data:
+<img src="../images/prices-22-12-2023.svg" style="width:950px" /></p>
+<p>I was quite suprised to find such a big price range for each model.
+Again to my knowledge the differences in the actual phone are only optical + color changes,
+still we get:</p>
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+<colgroup>
+<col class="org-left" />
+<col class="org-right" />
+<col class="org-right" />
+<col class="org-right" />
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="org-left">
+Phone
+</th>
+<th scope="col" class="org-right">
+Highest
+</th>
+<th scope="col" class="org-right">
+Lowest
+</th>
+<th scope="col" class="org-right">
+Difference
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="org-left">
+iphone 13
+</td>
+<td class="org-right">
+643
+</td>
+<td class="org-right">
+498
+</td>
+<td class="org-right">
+145
+</td>
+</tr>
+<tr>
+<td class="org-left">
+iphone 12
+</td>
+<td class="org-right">
+487
+</td>
+<td class="org-right">
+312
+</td>
+<td class="org-right">
+175
+</td>
+</tr>
+<tr>
+<td class="org-left">
+iphone SE (2022)
+</td>
+<td class="org-right">
+375
+</td>
+<td class="org-right">
+281
+</td>
+<td class="org-right">
+94
+</td>
+</tr>
+</tbody>
+</table>
 <h2 id="use-pyautogui-for-whats-app">Use Pyautogui for whats app</h2>
 <p>Ugly solution (though fascinating) sending whats app message to myself,
 by opening new tab in browser.</p>
 <h2 id="using-telegram-bot-seems-pretty-easy-to-setup">Using telegram bot (seems pretty easy to setup)</h2>
-<h3 id="future-next-in-series">Future (next in series)</h3>
+<p>I personally do not use telegram, but using bots for automated notifications seems
+like a really nice use case for it.
+Started writing a telegram bot which notifies about prices below threshold.</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> os</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> time</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> telebot</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> sqlite3</span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> dotenv <span class="im">import</span> load_dotenv</span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>load_dotenv()</span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>BOT_TOKEN <span class="op">=</span> os.environ.get(<span class="st">'BOT_TOKEN'</span>)</span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>bot <span class="op">=</span> telebot.TeleBot(BOT_TOKEN)</span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a><span class="at">@bot.message_handler</span>(commands<span class="op">=</span>[<span class="st">'start'</span>, <span class="st">'hello'</span>])</span>
+<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> send_welcome(message):</span>
+<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a>    bot.reply_to(message, <span class="st">&quot;Howdy, will start watching phone prices!&quot;</span>)</span>
+<span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-17"><a href="#cb3-17" aria-hidden="true" tabindex="-1"></a>    <span class="cf">while</span> <span class="va">True</span>:</span>
+<span id="cb3-18"><a href="#cb3-18" aria-hidden="true" tabindex="-1"></a>        check_and_notify(message.chat.<span class="bu">id</span>)</span>
+<span id="cb3-19"><a href="#cb3-19" aria-hidden="true" tabindex="-1"></a>        time.sleep(<span class="dv">60</span>)</span>
+<span id="cb3-20"><a href="#cb3-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-21"><a href="#cb3-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-22"><a href="#cb3-22" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> check_and_notify(chat_id):</span>
+<span id="cb3-23"><a href="#cb3-23" aria-hidden="true" tabindex="-1"></a>    thresholds <span class="op">=</span> {</span>
+<span id="cb3-24"><a href="#cb3-24" aria-hidden="true" tabindex="-1"></a>        <span class="st">'iphone-se-2022'</span>: <span class="dv">250</span>,</span>
+<span id="cb3-25"><a href="#cb3-25" aria-hidden="true" tabindex="-1"></a>        <span class="st">'iphone-13-mini'</span>: <span class="dv">420</span>,</span>
+<span id="cb3-26"><a href="#cb3-26" aria-hidden="true" tabindex="-1"></a>        <span class="st">'iphone-12'</span>: <span class="dv">300</span>,</span>
+<span id="cb3-27"><a href="#cb3-27" aria-hidden="true" tabindex="-1"></a>        <span class="st">'iphone-13'</span>: <span class="dv">600</span></span>
+<span id="cb3-28"><a href="#cb3-28" aria-hidden="true" tabindex="-1"></a>    }</span>
+<span id="cb3-29"><a href="#cb3-29" aria-hidden="true" tabindex="-1"></a>    conn <span class="op">=</span> sqlite3.<span class="ex">connect</span>(<span class="st">'/home/pt/repos/phone-prices/prices.db'</span>)</span>
+<span id="cb3-30"><a href="#cb3-30" aria-hidden="true" tabindex="-1"></a>    cursor <span class="op">=</span> conn.cursor()</span>
+<span id="cb3-31"><a href="#cb3-31" aria-hidden="true" tabindex="-1"></a>    cursor.execute(<span class="st">&quot;SELECT * FROM prices WHERE notified = 0&quot;</span>)</span>
+<span id="cb3-32"><a href="#cb3-32" aria-hidden="true" tabindex="-1"></a>    new_prices <span class="op">=</span> cursor.fetchall()</span>
+<span id="cb3-33"><a href="#cb3-33" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> price <span class="kw">in</span> new_prices:</span>
+<span id="cb3-34"><a href="#cb3-34" aria-hidden="true" tabindex="-1"></a>        row_id, url, price, date, html, notified <span class="op">=</span> price</span>
+<span id="cb3-35"><a href="#cb3-35" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> thresholds[url] <span class="op">&gt;=</span> <span class="bu">int</span>(price):</span>
+<span id="cb3-36"><a href="#cb3-36" aria-hidden="true" tabindex="-1"></a>            message_text <span class="op">=</span> <span class="st">&quot;&quot;&quot;</span></span>
+<span id="cb3-37"><a href="#cb3-37" aria-hidden="true" tabindex="-1"></a><span class="st">                New Price Alert!</span></span>
+<span id="cb3-38"><a href="#cb3-38" aria-hidden="true" tabindex="-1"></a><span class="st">                Phone: {url.split('/')[4]}</span></span>
+<span id="cb3-39"><a href="#cb3-39" aria-hidden="true" tabindex="-1"></a><span class="st">                Price: </span><span class="sc">{price}</span></span>
+<span id="cb3-40"><a href="#cb3-40" aria-hidden="true" tabindex="-1"></a><span class="st">                Time: </span><span class="sc">{date}</span></span>
+<span id="cb3-41"><a href="#cb3-41" aria-hidden="true" tabindex="-1"></a><span class="st">                Url: </span><span class="sc">{url}</span><span class="st">&quot;&quot;&quot;</span></span>
+<span id="cb3-42"><a href="#cb3-42" aria-hidden="true" tabindex="-1"></a>            bot.send_message(chat_id, message_text,</span>
+<span id="cb3-43"><a href="#cb3-43" aria-hidden="true" tabindex="-1"></a>                disable_web_page_preview<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb3-44"><a href="#cb3-44" aria-hidden="true" tabindex="-1"></a>        cursor.execute(<span class="st">&quot;UPDATE prices SET notified = 1 WHERE id = ?&quot;</span>,</span>
+<span id="cb3-45"><a href="#cb3-45" aria-hidden="true" tabindex="-1"></a>            (row_id,))</span>
+<span id="cb3-46"><a href="#cb3-46" aria-hidden="true" tabindex="-1"></a>        conn.commit()</span>
+<span id="cb3-47"><a href="#cb3-47" aria-hidden="true" tabindex="-1"></a>        time.sleep(<span class="dv">1</span>)</span>
+<span id="cb3-48"><a href="#cb3-48" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-49"><a href="#cb3-49" aria-hidden="true" tabindex="-1"></a>    conn.close()</span>
+<span id="cb3-50"><a href="#cb3-50" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-51"><a href="#cb3-51" aria-hidden="true" tabindex="-1"></a>bot.infinity_polling()</span></code></pre></div>
+<h2 id="future-post-next-in-series">Future Post (next in series)</h2>
 <ul>
 <li>having custom price alert solution in place (fun + in futuer lots of possible savings)</li>
 <li>I really would like to move this to azure (azure functions),</li>
 <li>store sqlite file in azure storage account, ideally using terraform</li>
+<li>I will have to report at which price I manage to get my phone</li>
 </ul>
     </section>
 </article>

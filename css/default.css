@@ -80,19 +80,6 @@ article .header {
     margin: 2rem;
 }
 
-code {
-    background-color: rgb(250, 250, 250);
-    border: 1px solid rgb(200, 200, 200);
-    padding-left: 4px;
-    padding-right: 4px;
-}
-
-pre code {
-    display: block;
-    padding: 8px;
-    margin-bottom: 2em;
-}
-
 
 @media (max-width: 319px) {
   body {
