@@ -1,5 +1,5 @@
 ---
-title: Scraping Phone Prices
+title: Scraping Phone Prices (1)
 author: Philipp Theyssen
 ---
 
@@ -11,7 +11,7 @@ to look for a new phone.
 I want to stay with an Iphone, mainly due to convenience.
 
 I also like my current setup which is centered around key apps and
-using a greyscale filter + a  heavily reduced whitepoint (see [cripple-your-technology](https://matt.might.net/articles/cripple-your-technology/))
+using a grayscale filter + a  heavily reduced white point (see [cripple-your-technology](https://matt.might.net/articles/cripple-your-technology/))
 
 Some apps I value:
 
@@ -28,7 +28,7 @@ Some apps I value:
 - brilliant
 - org file browsing + flat habits
 
-Thats why I want to stay with an Iphone, although they are of course very pricy.
+Thats why I want to stay with an Iphone, although they are of course very pricey.
 Luckily, buying refurbed nowadays is a great option, but when I started
 looking up some prices there seems to be quite a lot of movement going on.
 
@@ -57,11 +57,11 @@ the current offer, of course cheaper phone usually have a weird color and
 ## Update: Retrieve actual phone parameters
 The problem was that even though I had a price at a specific date,
 the exact parameters of the phone were missing. In the refurbished shop
-I use they always show you the "best deal", therefore dure to simplicity
-I started to save the entire html in the sqlite database also besides
+I use they always show you the "best deal", therefore
+I simply started to save the entire HTML in the sqlite database also besides
 the price, this lets me look up the phone parameters at a later point in time.
 
-The most imporant pieces of the code are:
+The code looks as follows:
 ```python
 # Function to scrape and extract the price from the provided URL
 def scrape_price(url):
@@ -128,17 +128,14 @@ def main():
 
 ## Setting up a systemd timer using NixOs
 
-To me an interesting part of this project is 
+To almost the most interesting part of this project is 
 setting up the scrap job as a systemd timer in my NixOs configuration.
-I only recently started using NixOS its always interesting (mmmh some people woudl say hard)
-to do things for the first time. Although I really feel the need to dive deeper
+I only recently started using NixOS, and still have a lot to learn.
+I really feel the need to dive deeper
 into the details and do things the correct way.
 
-Anyway, its actually very straight forward to declaratively define
-the systemd timer.
-
-Though, one thing I spent quite a lot of time on was, while developing this
-project I used a shell.nix file, with all the necessary packages, afterwards
+Anyway, it is actually straight forward to declaratively define
+the systemd timer:
 
 
 ```nix
@@ -178,7 +175,7 @@ project I used a shell.nix file, with all the necessary packages, afterwards
 Now lets take a look at some price data:
 <img src="../images/prices-22-12-2023.svg" style="width:950px"/>
 
-I was quite suprised to find such a big price range for each model.
+I was quite surprised to find such a big price range for each model.
 Again to my knowledge the differences in the actual phone are  only optical + color changes,
 still we get:
 
@@ -231,17 +228,14 @@ still we get:
 </table>
 
 
-## Use Pyautogui for whats app
-Ugly solution (though fascinating) sending whats app message to myself,
-by opening new tab in browser.
 
+## Price Alarms
 
-## Using telegram bot (seems pretty easy to setup)
-
+### Using a telegram bot
 I personally do not use telegram, but using bots for automated notifications seems
-like a really nice use case for it.
-Started writing a telegram bot which notifies about prices below threshold.
+like a really nice use case for it. 
 
+Started writing a telegram bot which notifies about prices below threshold.
 
 ```python
 import os
@@ -297,12 +291,37 @@ def check_and_notify(chat_id):
 bot.infinity_polling()
 ```
 
+## Update: 6.1.2024
+I have some new price data to share:
+
+
+<img src="../images/prices-6-1-2024.svg" style="width:950px"/>
+
+You see that lonely orange dot on the 2.1.2024?
+Thats when I managed to "buy" two Iphone 13 for 143€ each.
+This of course turned out to be a bug, and no phones were delivered.
+
+The relevant german law is roughly as follows:
+
+> Usually as soon as you buy something in an online store the purchase contract is concluded between you and the online shop,
+> but if you yourself did not trust the price to be real
+> its not a valid contract, they call this "trust theory".
+
+Which of course applies in my case.
 
 
 
+## Scraping via Azure Functions
+Next I decided to host the scraping on azure:
 
-## Future Post (next in series)
-- having custom price alert solution in place (fun + in futuer lots of possible savings)
-- I really would like to move this to azure (azure functions),
-- store sqlite file in azure storage account, ideally using terraform
-- I will have to report at which price I manage to get my phone
+[scraping-phone-prices-(2)](./2023-12-31-az-phone-prices.html)
+
+<!--  LocalWords:  Philipp Theyssen Iphone apps anki gmaps fitbit org
+<!--  LocalWords:  shortbreak wikipedia nextcloud whatsapp pricey def
+<!--  LocalWords:  refurbed sqlite url BeautifulSoup html extracing
+<!--  LocalWords:  str systemd NixOs NixOS wantedBy pkgs ps numpy pt
+<!--  LocalWords:  beautifulsoup serviceConfig oneshot img src px col
+<!--  LocalWords:  cellspacing cellpadding hsides colgroup thead tr
+<!--  LocalWords:  tbody td iphone bot bots os telebot dotenv int
+<!--  LocalWords:  fetchall
+ -->

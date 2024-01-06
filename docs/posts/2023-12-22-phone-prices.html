@@ -4,7 +4,7 @@
         <meta charset="utf-8">
         <meta http-equiv="x-ua-compatible" content="ie=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <title>Scraping Phone Prices - Philipp Theyssen's Homepage</title>
+        <title>Scraping Phone Prices (1) - Philipp Theyssen's Homepage</title>
         <link rel="stylesheet" href="../css/default.css" />
         <link rel="stylesheet" href="../css/syntax.css" />
     </head>
@@ -26,7 +26,7 @@
         </header>
 
         <main role="main">
-            <h1>Scraping Phone Prices</h1>
+            <h1>Scraping Phone Prices (1)</h1>
             <article>
     <section class="header">
         Posted on December 22, 2023
@@ -40,7 +40,7 @@
 to look for a new phone.</p>
 <p>I want to stay with an Iphone, mainly due to convenience.</p>
 <p>I also like my current setup which is centered around key apps and
-using a greyscale filter + a heavily reduced whitepoint (see <a href="https://matt.might.net/articles/cripple-your-technology/">cripple-your-technology</a>)</p>
+using a grayscale filter + a heavily reduced white point (see <a href="https://matt.might.net/articles/cripple-your-technology/">cripple-your-technology</a>)</p>
 <p>Some apps I value:</p>
 <ul>
 <li>anki</li>
@@ -56,7 +56,7 @@ using a greyscale filter + a heavily reduced whitepoint (see <a href="https://ma
 <li>brilliant</li>
 <li>org file browsing + flat habits</li>
 </ul>
-<p>Thats why I want to stay with an Iphone, although they are of course very pricy.
+<p>Thats why I want to stay with an Iphone, although they are of course very pricey.
 Luckily, buying refurbed nowadays is a great option, but when I started
 looking up some prices there seems to be quite a lot of movement going on.</p>
 <p>This likely arises naturally from the market (resellers depend on individuals or
@@ -78,10 +78,10 @@ the current offer, of course cheaper phone usually have a weird color and</p>
 <h2 id="update-retrieve-actual-phone-parameters">Update: Retrieve actual phone parameters</h2>
 <p>The problem was that even though I had a price at a specific date,
 the exact parameters of the phone were missing. In the refurbished shop
-I use they always show you the “best deal”, therefore dure to simplicity
-I started to save the entire html in the sqlite database also besides
+I use they always show you the “best deal”, therefore
+I simply started to save the entire HTML in the sqlite database also besides
 the price, this lets me look up the phone parameters at a later point in time.</p>
-<p>The most imporant pieces of the code are:</p>
+<p>The code looks as follows:</p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Function to scrape and extract the price from the provided URL</span></span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> scrape_price(url):</span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>    response <span class="op">=</span> requests.get(url)</span>
@@ -143,15 +143,13 @@ the price, this lets me look up the phone parameters at a later point in time.</
 <span id="cb1-59"><a href="#cb1-59" aria-hidden="true" tabindex="-1"></a>        <span class="cf">else</span>:</span>
 <span id="cb1-60"><a href="#cb1-60" aria-hidden="true" tabindex="-1"></a>            <span class="cf">pass</span></span></code></pre></div>
 <h2 id="setting-up-a-systemd-timer-using-nixos">Setting up a systemd timer using NixOs</h2>
-<p>To me an interesting part of this project is
+<p>To almost the most interesting part of this project is
 setting up the scrap job as a systemd timer in my NixOs configuration.
-I only recently started using NixOS its always interesting (mmmh some people woudl say hard)
-to do things for the first time. Although I really feel the need to dive deeper
+I only recently started using NixOS, and still have a lot to learn.
+I really feel the need to dive deeper
 into the details and do things the correct way.</p>
-<p>Anyway, its actually very straight forward to declaratively define
-the systemd timer.</p>
-<p>Though, one thing I spent quite a lot of time on was, while developing this
-project I used a shell.nix file, with all the necessary packages, afterwards</p>
+<p>Anyway, it is actually straight forward to declaratively define
+the systemd timer:</p>
 <div class="sourceCode" id="cb2"><pre class="sourceCode nix"><code class="sourceCode nix"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>  systemd.timers.<span class="st">&quot;scrape-phone-prices&quot;</span> = <span class="op">{</span></span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>    <span class="va">wantedBy</span> <span class="op">=</span> <span class="op">[</span> <span class="st">&quot;timers.target&quot;</span> <span class="op">];</span></span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>    <span class="va">timerConfig</span> <span class="op">=</span> <span class="op">{</span></span>
@@ -183,7 +181,7 @@ project I used a shell.nix file, with all the necessary packages, afterwards</p>
 <h2 id="recorded-price-data">Recorded Price Data</h2>
 <p>Now lets take a look at some price data:
 <img src="../images/prices-22-12-2023.svg" style="width:950px" /></p>
-<p>I was quite suprised to find such a big price range for each model.
+<p>I was quite surprised to find such a big price range for each model.
 Again to my knowledge the differences in the actual phone are only optical + color changes,
 still we get:</p>
 <table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
@@ -254,13 +252,11 @@ iphone SE (2022)
 </tr>
 </tbody>
 </table>
-<h2 id="use-pyautogui-for-whats-app">Use Pyautogui for whats app</h2>
-<p>Ugly solution (though fascinating) sending whats app message to myself,
-by opening new tab in browser.</p>
-<h2 id="using-telegram-bot-seems-pretty-easy-to-setup">Using telegram bot (seems pretty easy to setup)</h2>
+<h2 id="price-alarms">Price Alarms</h2>
+<h3 id="using-a-telegram-bot">Using a telegram bot</h3>
 <p>I personally do not use telegram, but using bots for automated notifications seems
-like a really nice use case for it.
-Started writing a telegram bot which notifies about prices below threshold.</p>
+like a really nice use case for it.</p>
+<p>Started writing a telegram bot which notifies about prices below threshold.</p>
 <div class="sourceCode" id="cb3"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> os</span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> time</span>
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> telebot</span>
@@ -312,20 +308,38 @@ Started writing a telegram bot which notifies about prices below threshold.</p>
 <span id="cb3-49"><a href="#cb3-49" aria-hidden="true" tabindex="-1"></a>    conn.close()</span>
 <span id="cb3-50"><a href="#cb3-50" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb3-51"><a href="#cb3-51" aria-hidden="true" tabindex="-1"></a>bot.infinity_polling()</span></code></pre></div>
-<h2 id="future-post-next-in-series">Future Post (next in series)</h2>
-<ul>
-<li>having custom price alert solution in place (fun + in futuer lots of possible savings)</li>
-<li>I really would like to move this to azure (azure functions),</li>
-<li>store sqlite file in azure storage account, ideally using terraform</li>
-<li>I will have to report at which price I manage to get my phone</li>
-</ul>
+<h2 id="update-6.1.2024">Update: 6.1.2024</h2>
+<p>I have some new price data to share:</p>
+<p><img src="../images/prices-6-1-2024.svg" style="width:950px" /></p>
+<p>You see that lonely orange dot on the 2.1.2024?
+Thats when I managed to “buy” two Iphone 13 for 143€ each.
+This of course turned out to be a bug, and no phones were delivered.</p>
+<p>The relevant german law is roughly as follows:</p>
+<blockquote>
+<p>Usually as soon as you buy something in an online store the purchase contract is concluded between you and the online shop,
+but if you yourself did not trust the price to be real
+its not a valid contract, they call this “trust theory”.</p>
+</blockquote>
+<p>Which of course applies in my case.</p>
+<h2 id="scraping-via-azure-functions">Scraping via Azure Functions</h2>
+<p>Next I decided to host the scraping on azure:</p>
+<p><a href="./2023-12-31-az-phone-prices.html">scraping-phone-prices-(2)</a></p>
+<!--  LocalWords:  Philipp Theyssen Iphone apps anki gmaps fitbit org
+<!--  LocalWords:  shortbreak wikipedia nextcloud whatsapp pricey def
+<!--  LocalWords:  refurbed sqlite url BeautifulSoup html extracing
+<!--  LocalWords:  str systemd NixOs NixOS wantedBy pkgs ps numpy pt
+<!--  LocalWords:  beautifulsoup serviceConfig oneshot img src px col
+<!--  LocalWords:  cellspacing cellpadding hsides colgroup thead tr
+<!--  LocalWords:  tbody td iphone bot bots os telebot dotenv int
+<!--  LocalWords:  fetchall
+ -->
     </section>
 </article>
 
         </main>
 
         <footer>
-            <!-- Site proudly generated by Hakyll -->
+            Site proudly generated by Hakyll
         </footer>
     </body>
 </html>

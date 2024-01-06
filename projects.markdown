@@ -2,7 +2,7 @@
 title: Projects
 ---
 
-Here you can find some projects..
+Here are some projects I worked on.
 
 $~$  
 
