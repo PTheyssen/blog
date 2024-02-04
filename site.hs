@@ -19,9 +19,13 @@ main = hakyllWith config $ do
         route   idRoute
         compile copyFileCompiler
 
-    match "master_thesis.pdf" $ do
+    match "pmph-2022-CUDA-bfast-algorithm.pdf" $ do
         route   idRoute
         compile copyFileCompiler
+
+    match "master_thesis.pdf" $ do
+        route   idRoute
+        compile copyFileCompiler        
 
     match "bachelor_thesis.pdf" $ do
         route   idRoute
