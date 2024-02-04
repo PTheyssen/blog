@@ -311,10 +311,10 @@ Which of course applies in my case.
 
 
 
-## Scraping via Azure Functions
-Next I decided to host the scraping on azure:
+<!-- ## Scraping via Azure Functions -->
+<!-- Next I decided to host the scraping on azure: -->
 
-[scraping-phone-prices-(2)](./2023-12-31-az-phone-prices.html)
+<!-- [scraping-phone-prices-(2)](./2023-12-31-az-phone-prices.html) -->
 
 <!--  LocalWords:  Philipp Theyssen Iphone apps anki gmaps fitbit org
 <!--  LocalWords:  shortbreak wikipedia nextcloud whatsapp pricey def
