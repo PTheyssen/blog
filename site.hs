@@ -19,6 +19,14 @@ main = hakyllWith config $ do
         route   idRoute
         compile copyFileCompiler
 
+    match "master_thesis.pdf" $ do
+        route   idRoute
+        compile copyFileCompiler
+
+    match "bachelor_thesis.pdf" $ do
+        route   idRoute
+        compile copyFileCompiler
+
     match "CNAME" $ do
         route   idRoute
         compile copyFileCompiler

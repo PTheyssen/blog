@@ -22,12 +22,12 @@ Lets imagine you have a small expression like this:
  "returnValues": [
    {
      "key": "val-1",
-     "value": "response.payload.table["first"]"     
+     "value": "response.payload.table["first"]"
      "type": "object"
 
    }
  ]
- 
+
 }
 
 ```
@@ -49,18 +49,16 @@ https://github.com/grafana/k6/blob/master/execution/scheduler.go
 
 
 Open vs. closed model in K6 https://k6.io/docs/using-k6/scenarios/concepts/open-vs-closed/
-- duration vs. goal rate 
+- duration vs. goal rate
 - starting rate / arrival rate
 
 
-- Adjust workload execution based on application result (% of succesfull requests) 
+- Adjust workload execution based on application result (% of succesfull requests)
   -> actual throughput achieved
   - have threshold that monitors
 
 
 ## Submitting workload to orlean grains
 
-want to stay below max concurrent threshold use 
+want to stay below max concurrent threshold use
 queue / pipeline?
-
-

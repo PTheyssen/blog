@@ -41,6 +41,7 @@ needs to bring in externals
 - agree on next actions
 - as a technical engineer
 
+
 ### What makes this hard?
 As a technical engineer I want to solve problems and not push
 external contributors to do their job properly (especially in large projects).
