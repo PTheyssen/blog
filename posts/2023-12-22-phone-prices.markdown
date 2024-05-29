@@ -1,5 +1,5 @@
 ---
-title: Scraping Phone Prices (1)
+title: Scraping Phone Prices
 author: Philipp Theyssen
 ---
 
