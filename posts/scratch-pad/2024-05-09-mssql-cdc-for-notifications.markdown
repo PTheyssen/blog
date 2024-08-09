@@ -3,15 +3,13 @@ title: CDC for generating Notifications in SQL Server
 author: Philipp Theyssen
 ---
 
-At work we are implementing an use-case of  generating notifications
+At work we are implementing a notification panel
 for a user in a web application. The original events are based on updates made to certain tables
 in a sql server DB (Azure sql managed instance). 
 
 Multiple possibilities exist to generate the notifications, but
 for now we have  decided to use Change Data Capture (CDC) for generating the actual events.
 Other options would included asnyc decoupled events / message passing.
-
-Which has its benefits but is definitely overkill for our current setup (infrastructure).
 
 
 I have already encountered Change Data Capture (CDC) during my university,
@@ -23,7 +21,6 @@ of course there is the t-sql reference but still no advanced.
 
 There exists more advanced tutorial on using debezium but this again requires eventhub 
 https://github.com/Azure-Samples/azure-sql-db-change-stream-debezium.
-
 
 
 We will consider a product table which can receive insert, updates and deletes events, 
@@ -112,3 +109,36 @@ GO
 
 
 
+
+## Querying CDC changes
+Reading:
+https://learn.microsoft.com/en-us/sql/relational-databases/system-functions/cdc-fn-cdc-get-all-changes-capture-instance-transact-sql?view=sql-server-ver16
+https://github.com/ReplTalk/ReplScripts/blob/master/CDC/Workaround_to_avoid_313_error.sql
+
+```sql
+DECLARE @LastReadLSN binary(10)
+DECLARE @EndLSN binary(10)
+DECLARE @NewStartLSN binary(10)
+
+SET @LastReadLSN = 0x00EA29F80015C3880023 
+SET @EndLSN   = sys.fn_cdc_get_max_lsn()
+
+IF @LastReadLSN IS NULL -- The first query
+BEGIN
+  SET @NewStartLSN = sys.fn_cdc_get_min_lsn('dbo_Accounts')
+END
+ELSE
+IF @EndLSN > @LastReadLSN -- Something has happened in the database
+BEGIN
+  SET @NewStartLSN = sys.fn_cdc_increment_lsn(@LastReadLSN)
+END
+ELSE
+IF @LastReadLSN = @EndLSN -- Nothing has happened in the database
+BEGIN
+  SET @NewStartLSN = NULL
+END
+
+SELECT *
+FROM cdc.fn_cdc_get_all_changes_dbo_Accounts (@NewStartLSN, @EndLSN, N'ALL')
+WHERE @NewStartLSN IS NOT NULL
+```
