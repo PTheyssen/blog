@@ -6,7 +6,6 @@ When making changes to site.hs need to recompile with:
 cabal new-install --overwrite-policy=always
 ```
 
-
 Build the site:
 ``` shell
 site build
