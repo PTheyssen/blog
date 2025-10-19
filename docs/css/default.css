@@ -1,5 +1,5 @@
 html {
-    font-size: 70%;
+    font-size: 60%;
     font-family: sans-serif;
     color: #fff5cc;
 }
@@ -203,13 +203,13 @@ article .header {
         width: 95%;
         max-width: 120rem;
         margin: 0 auto;
-        padding: 2rem;
+        padding: 4rem 2rem 2rem 2rem;
     }
     
     .page-container {
         display: grid;
-        grid-template-columns: 30rem 1fr;
-        gap: 2rem;
+        grid-template-columns: 35rem 1fr;
+        gap: 4rem;
     }
 
     .content-wrapper {
