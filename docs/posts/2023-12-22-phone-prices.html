@@ -1,33 +1,99 @@
 <!doctype html>
 <html lang="en">
-    <head>
-        <meta charset="utf-8">
-        <meta http-equiv="x-ua-compatible" content="ie=edge">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <title>Scraping Phone Prices - Philipp Theyssen's Homepage</title>
-        <link rel="stylesheet" href="../css/default.css" />
-        <link rel="stylesheet" href="../css/syntax.css" />
-    </head>
-    <body>
-        <header>
-            <div class="logo">
-                <a href="../">Home</a>
-            </div>
-            <nav>
-              <!-- <a href="/">Home</a> -->
-                <a href="../archive.html">Blog</a>
-                <a href="../now.html">Now</a>
-                <a href="../projects.html">Projects</a>
-                <a href="https://github.com/PTheyssen" target="_blank">Code</a>
-                <a href="../cv.pdf" target="_blank">CV</a>
-                <a href="../contact.html">Contact</a>
-                <a href="../photos.html">Photos</a>
-            </nav>
-        </header>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Philipp Theyssen's Homepage</title>
+    <link rel="stylesheet" href="../css/default.css" />
+    <link rel="stylesheet" href="../css/syntax.css" />
+      <!-- Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+      .social-buttons {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        margin-top: 24px;
+      }
 
+      .social-btn {
+        width: 50%;
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        padding: 10px 16px;
+        border: 2px solid #b8b8b8;
+        border-radius: 6px;
+        text-decoration: none;
+        color: #333;
+        /* background-color: #D3D3D3; */
+        background-color: #fff;
+        transition: all 0.2s ease;
+        font-size: 16px;
+      }
+
+      .social-btn:hover {
+        background-color: #f5f5f5;
+        border-color: #999;
+      }
+
+      .social-btn i {
+        font-size: 18px;
+        width: 20px;
+        text-align: center;
+        color: #333;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="page-container">
+      <aside class="sidebar">
+        <div class="snow">
+          <img src="../images/me.jpg" alt="Philipp" />
+        </div>
+
+        <h1>Hi!</h1>
+
+        <p>
+          I'm Philipp Theyssen. I am a Software Engineer at Allianz Technology.
+        </p>
+
+        <p>
+          I build high-quality fullstack applications.
+          I especially enjoy <b>applied theory</b>,
+          which for me means building real-world systems grounded in rigorous formal models.
+        </p>
+        <div class="social-buttons">
+          <a href="https://github.com/PTheyssen" target="_blank" rel="noopener noreferrer" class="social-btn" aria-label="GitHub">
+            <i class="fab fa-github"></i>
+            <span>GitHub</span>
+          </a>
+          <a href="https://www.linkedin.com/in/philipp-theyssen/" target="_blank" rel="noopener noreferrer" class="social-btn" aria-label="LinkedIn">
+            <i class="fab fa-linkedin-in"></i>
+            <span>LinkedIn</span>
+          </a>
+          <a href="mailto:p.theyssen@gmail.com" class="social-btn" aria-label="Email">
+            <i class="fas fa-envelope"></i>
+            <span>Email</span>
+          </a>
+        </div>
+      </aside>
+      <div class="content-wrapper">
+        <header>
+          <nav>
+            <a href="../now.html">Now</a>            
+            <a href="../archive.html">Blog</a>
+            <a href="../projects.html">Projects</a>
+            <!-- <a href="https://github.com/PTheyssen" target="_blank">Code</a> -->
+            <a href="../cv.pdf" target="_blank">CV</a>
+            <!-- <a href="/contact.html">Contact</a> -->
+            <a href="../photos.html">Photos</a>
+          </nav>
+        </header>
         <main role="main">
-            <h1>Scraping Phone Prices</h1>
-            <article>
+          <!-- <h1>Scraping Phone Prices</h1> -->
+          <article>
     <section class="header">
         Posted on December 22, 2023
         
@@ -150,7 +216,7 @@ I really feel the need to dive deeper
 into the details and do things the correct way.</p>
 <p>Anyway, it is actually straight forward to declaratively define
 the systemd timer:</p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode nix"><code class="sourceCode nix"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>  systemd.timers.<span class="st">&quot;scrape-phone-prices&quot;</span> = <span class="op">{</span></span>
+<div class="sourceCode" id="cb2"><pre class="sourceCode nix"><code class="sourceCode nix"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>  systemd<span class="op">.</span>timers<span class="op">.</span><span class="st">&quot;scrape-phone-prices&quot;</span> = <span class="op">{</span></span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>    <span class="va">wantedBy</span> <span class="op">=</span> <span class="op">[</span> <span class="st">&quot;timers.target&quot;</span> <span class="op">];</span></span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>    <span class="va">timerConfig</span> <span class="op">=</span> <span class="op">{</span></span>
 <span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>      <span class="va">OnBootSec</span> <span class="op">=</span> <span class="st">&quot;30m&quot;</span><span class="op">;</span></span>
@@ -159,12 +225,12 @@ the systemd timer:</p>
 <span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>    <span class="op">};</span></span>
 <span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>  <span class="op">}</span>;</span>
 <span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>  systemd.services.<span class="st">&quot;scrape-phone-prices&quot;</span> = <span class="op">{</span></span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>  systemd<span class="op">.</span>services<span class="op">.</span><span class="st">&quot;scrape-phone-prices&quot;</span> = <span class="op">{</span></span>
 <span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>    <span class="va">wantedBy</span> <span class="op">=</span> <span class="op">[</span> <span class="st">&quot;multi-user.target&quot;</span> <span class="op">];</span></span>
 <span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>    <span class="va">path</span> <span class="op">=</span> <span class="op">[</span></span>
-<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>      pkgs.nix</span>
-<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a>      pkgs.bash</span>
-<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a>      <span class="op">(</span>pkgs.python3.withPackages <span class="op">(</span><span class="va">ps</span><span class="op">:</span> <span class="kw">with</span> ps<span class="op">;</span> <span class="op">[</span></span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>      pkgs<span class="op">.</span>nix</span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a>      pkgs<span class="op">.</span>bash</span>
+<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a>      <span class="op">(</span>pkgs<span class="op">.</span>python3<span class="op">.</span>withPackages <span class="op">(</span><span class="va">ps</span><span class="op">:</span> <span class="kw">with</span> ps<span class="op">;</span> <span class="op">[</span></span>
 <span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a>        numpy</span>
 <span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a>        requests</span>
 <span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a>        beautifulsoup4</span>
@@ -337,9 +403,10 @@ its not a valid contract, they call this “trust theory”.</p>
 </article>
 
         </main>
-
-        <footer>
-            Site proudly generated by Hakyll
-        </footer>
-    </body>
+      </div>
+    </div>
+    <footer>
+      Site proudly generated by Hakyll
+    </footer>
+  </body>
 </html>

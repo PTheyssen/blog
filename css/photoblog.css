@@ -1,5 +1,5 @@
 html {
-    font-size: 70.5%;
+    font-size: 60.5%;
     /* font-family: Consolas, monaco, monospace; */
     font-family: sans-serif;
     /* font-family: Georgia,serif; */
@@ -15,7 +15,7 @@ body {
 }
 
 header {
-  border-bottom: 0.2rem dashed #000;
+  /* border-bottom: 0.2rem dashed #000; */
 }
 
 header a:hover {
