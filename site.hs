@@ -42,7 +42,7 @@ main = hakyllWith config $ do
     match (fromList ["contact.markdown", "now.markdown"]) $ do
         route   $ setExtension "html"
         compile $ pandocCompiler
-            >>= loadAndApplyTemplate "templates/default.html" defaultContext
+            >>= loadAndApplyTemplate "templates/default.html" rootContext
             >>= relativizeUrls
 
     match (fromList ["photos.markdown", "photos2.markdown", "photos3.markdown", "photos4.markdown"]) $ do
@@ -54,7 +54,7 @@ main = hakyllWith config $ do
     match "projects.markdown" $ do
         route   $ setExtension "html"
         compile $ pandocCompiler
-            >>= loadAndApplyTemplate "templates/default.html" defaultContext
+            >>= loadAndApplyTemplate "templates/default.html" rootContext
             >>= relativizeUrls
 
     match "posts/*" $ do
@@ -71,7 +71,7 @@ main = hakyllWith config $ do
             let archiveCtx =
                     listField "posts" postCtx (return posts) `mappend`
                     constField "title" "Blog Posts"            `mappend`
-                    defaultContext
+                    rootContext
 
             makeItem ""
                 >>= loadAndApplyTemplate "templates/archive.html" archiveCtx
@@ -85,7 +85,7 @@ main = hakyllWith config $ do
             posts <- recentFirst =<< loadAll "posts/*"
             let indexCtx =
                     listField "posts" postCtx (return posts) `mappend`
-                    defaultContext
+                    rootContext
 
             getResourceBody
                 >>= applyAsTemplate indexCtx
@@ -96,7 +96,12 @@ main = hakyllWith config $ do
 
 
 --------------------------------------------------------------------------------
+-- Add this helper function
+rootContext :: Context String
+rootContext = constField "root" "" `mappend` defaultContext
+
 postCtx :: Context String
 postCtx =
+    constField "root" ".." `mappend`  -- Posts are one level deep
     dateField "date" "%B %e, %Y" `mappend`
     defaultContext
