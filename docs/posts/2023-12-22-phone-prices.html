@@ -7,6 +7,44 @@
     <title>Philipp Theyssen's Homepage</title>
     <link rel="stylesheet" href="../css/default.css" />
     <link rel="stylesheet" href="../css/syntax.css" />
+      <!-- Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+      .social-buttons {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        margin-top: 24px;
+      }
+
+      .social-btn {
+        width: 50%;
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        padding: 10px 16px;
+        border: 2px solid #b8b8b8;
+        border-radius: 6px;
+        text-decoration: none;
+        color: #333;
+        /* background-color: #D3D3D3; */
+        background-color: #fff;
+        transition: all 0.2s ease;
+        font-size: 16px;
+      }
+
+      .social-btn:hover {
+        background-color: #f5f5f5;
+        border-color: #999;
+      }
+
+      .social-btn i {
+        font-size: 18px;
+        width: 20px;
+        text-align: center;
+        color: #333;
+      }
+    </style>
   </head>
   <body>
     <div class="page-container">
@@ -23,7 +61,23 @@
 
         <p>
           I build high-quality fullstack applications.
+          I especially enjoy <b>applied theory</b>,
+          which for me means building real-world systems grounded in rigorous formal models.
         </p>
+        <div class="social-buttons">
+          <a href="https://github.com/PTheyssen" target="_blank" rel="noopener noreferrer" class="social-btn" aria-label="GitHub">
+            <i class="fab fa-github"></i>
+            <span>GitHub</span>
+          </a>
+          <a href="https://www.linkedin.com/in/your-profile" target="_blank" rel="noopener noreferrer" class="social-btn" aria-label="LinkedIn">
+            <i class="fab fa-linkedin-in"></i>
+            <span>LinkedIn</span>
+          </a>
+          <a href="mailto:your.email@example.com" class="social-btn" aria-label="Email">
+            <i class="fas fa-envelope"></i>
+            <span>Email</span>
+          </a>
+        </div>
       </aside>
       <div class="content-wrapper">
         <header>
@@ -31,9 +85,9 @@
             <a href="../archive.html">Blog</a>
             <a href="../now.html">Now</a>
             <a href="../projects.html">Projects</a>
-            <a href="https://github.com/PTheyssen" target="_blank">Code</a>
+            <!-- <a href="https://github.com/PTheyssen" target="_blank">Code</a> -->
             <a href="../cv.pdf" target="_blank">CV</a>
-            <a href="../contact.html">Contact</a>
+            <!-- <a href="/contact.html">Contact</a> -->
             <a href="../photos.html">Photos</a>
           </nav>
         </header>

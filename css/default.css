@@ -37,7 +37,7 @@ footer {
     margin-top: 3rem;
     padding: 1.2rem 0;
     border-top: 0.2rem dashed #000;
-    font-size: 1.2rem;
+    font-size: 1.4rem;
     color: #555;
 }
 
@@ -74,8 +74,8 @@ article .header {
 }
 
 .snow img {
-    width: 320px;
-    height: 350px;
+    width: 300px;
+    height: 320px;
     border-radius: 6px;
 }
 
